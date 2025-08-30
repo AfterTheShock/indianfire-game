@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MovementWithoutPot : MonoBehaviour
@@ -7,21 +6,32 @@ public class MovementWithoutPot : MonoBehaviour
     [SerializeField] private Vector2 deceleration;
     [SerializeField] private Vector2 maxSpeed;
     [SerializeField] private LayerMask climbLayerMask;
-    
+
+    [SerializeField] Transform playerVisuals;
+
+    [SerializeField] Animator animator;
+
+    private PotOnHandManager potOnHandManager;
     
     private bool canClimb;
     private bool canExtinguishFire;
     private bool isClimbing;
+    private bool canGrabPot;
     
     private Rigidbody2D rb2d;
 
+    private Vector2 movementInput;
+    
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        potOnHandManager = GetComponent<PotOnHandManager>();
     }
 
     private void Update()
     {
+        Debug.Log(canGrabPot);
+        
         if (canExtinguishFire)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -29,11 +39,22 @@ public class MovementWithoutPot : MonoBehaviour
                 Debug.Log("Extinguish Fire Hut");
             }
         }
+
+        if (canGrabPot)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                potOnHandManager.GrabPot();
+                canGrabPot = false;
+            }
+        }
+
+        ManagePlayerAnimations();
     }
 
     private void FixedUpdate()
     {
-        Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 movementAbsInput = new Vector2(Mathf.Abs(movementInput.x), Mathf.Abs(movementInput.y));
 
         Vector2 direction = movementInput.normalized;
@@ -61,13 +82,29 @@ public class MovementWithoutPot : MonoBehaviour
         }
     }
     
+    private void ManagePlayerAnimations()
+    {
+        if (movementInput.x != 0) animator.Play("WalkWithoutPotPlayer");
+        else animator.Play("IdleWithoutPotPlayer 1");
+        if(movementInput.x > 0) playerVisuals.localScale = new Vector3(1,1,1);
+        if(movementInput.x < 0) playerVisuals.localScale = new Vector3(-1,1,1);
+    }
+    
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Climb")) canClimb = true;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climb"))
+        {
+            canClimb = true;
+        }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
         {
             canExtinguishFire = true;
+        }
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))
+        {
+            canGrabPot = true;
         }
     }
 
@@ -82,6 +119,11 @@ public class MovementWithoutPot : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
         {
             canExtinguishFire = false;
+        }
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))
+        {
+            canGrabPot = false;
         }
     }
 }

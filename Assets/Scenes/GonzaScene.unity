@@ -467,7 +467,8 @@ MonoBehaviour:
   climbLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  canClimb: 0
+  playerVisuals: {fileID: 700759752}
+  animator: {fileID: 1462011411}
 --- !u!1 &173426147
 GameObject:
   m_ObjectHideFlags: 0
@@ -6766,7 +6767,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6986274589459671846, guid: 3da862f6685eb444eb7a205f816ccdb2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1535425755250739056, guid: 3da862f6685eb444eb7a205f816ccdb2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
