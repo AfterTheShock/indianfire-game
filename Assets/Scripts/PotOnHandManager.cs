@@ -7,6 +7,9 @@ public class PotOnHandManager : MonoBehaviour
 
     [SerializeField] GameObject[] ObjectsToBeOnWithWater = new GameObject[0];
 
+    [SerializeField] GameObject withPotVisuals;
+    [SerializeField] GameObject withoutPotVisuals;
+
     [SerializeField] GameObject potOnGroundPrefab;
 
     [SerializeField] Transform pointToDropPot;
@@ -43,9 +46,12 @@ public class PotOnHandManager : MonoBehaviour
 
         hasPotGrabbed = false;
         movementWithPot.enabled = false;
+        withPotVisuals.SetActive(false);
         movementWithoutPot.enabled = true;
+        withoutPotVisuals.SetActive(true);
 
         playerWithPotVisuals.transform.rotation = Quaternion.identity;
+        SetWaterOnPot(false);
     }
 
     public void GrabPot()
@@ -54,7 +60,11 @@ public class PotOnHandManager : MonoBehaviour
 
         hasPotGrabbed = false;
         movementWithPot.enabled = false;
+        withoutPotVisuals.SetActive(false);
         movementWithoutPot.enabled = true;
+        withPotVisuals.SetActive(true);
+        //Do OnlyIfPotHasWater
+        if (true) SetWaterOnPot(true);
     }
 
     private void SetWaterOnPot(bool hasWater)
