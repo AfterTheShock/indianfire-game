@@ -1,43 +1,69 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float acceleration;
-    [SerializeField] private float deceleration;
-    [SerializeField] private float maxSpeed;
+    [SerializeField] private Vector2 acceleration;
+    [SerializeField] private Vector2 deceleration;
+    [SerializeField] private Vector2 maxSpeed;
+    [SerializeField] private LayerMask climbLayerMask;
+    [SerializeField] private bool canClimb;
     
-    private float horizontalInput;
-    private Vector2 direction;
+    private bool isClimbing;
     
     private Rigidbody2D rb2d;
+    private BoxCollider2D boxCollider;
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void FixedUpdate()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        float absHorizontalInput = Mathf.Abs(horizontalInput);
-        bool isMoving = absHorizontalInput > 0;
-        direction = new Vector2(horizontalInput, 0).normalized;
+        //Debug.Log(isClimbing);
         
-        // El player se esta moviendo
-        if (isMoving)
+        Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 movementAbsInput = new Vector2(Mathf.Abs(movementInput.x), Mathf.Abs(movementInput.y));
+
+        Vector2 direction = movementInput.normalized;
+
+        if (canClimb)
         {
-            rb2d.linearVelocity = direction * new Vector2(
-                Mathf.Clamp(absHorizontalInput * acceleration, -maxSpeed, maxSpeed), rb2d.linearVelocity.y) * Time.fixedDeltaTime;
+            if (movementAbsInput.y > 0f) isClimbing = true;
         }
-        else if(Mathf.Abs(rb2d.linearVelocity.x) > 0.2f)
+        
+        if (!isClimbing)
         {
-            Vector2 dDir = -rb2d.linearVelocity.normalized;
-            rb2d.linearVelocity = dDir * (deceleration * Time.fixedDeltaTime);
+            rb2d.gravityScale = 1f;
+            
+            rb2d.linearVelocity = direction * new Vector2(
+                Mathf.Clamp(movementAbsInput.x * acceleration.x, -maxSpeed.x, maxSpeed.x) * Time.fixedDeltaTime, 
+                0f) + new Vector2(0f, rb2d.linearVelocity.y);
         }
         else
         {
-            rb2d.linearVelocity = new Vector2(0, rb2d.linearVelocity.y);
+            rb2d.gravityScale = 0f;
+            
+            rb2d.linearVelocity = direction * new Vector2(
+                Mathf.Clamp(movementAbsInput.x * acceleration.x, -maxSpeed.x, maxSpeed.x), 
+                Mathf.Clamp(movementAbsInput.y * acceleration.y, -maxSpeed.y, maxSpeed.y)) * Time.fixedDeltaTime;
+        }
+    }
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climb")) canClimb = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climb"))
+        {
+            isClimbing = false;
+            canClimb = false;
         }
     }
 }
