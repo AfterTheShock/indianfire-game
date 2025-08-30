@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovementWithoutPot : MonoBehaviour
@@ -6,8 +7,10 @@ public class MovementWithoutPot : MonoBehaviour
     [SerializeField] private Vector2 deceleration;
     [SerializeField] private Vector2 maxSpeed;
     [SerializeField] private LayerMask climbLayerMask;
-    [SerializeField] private bool canClimb;
     
+    
+    private bool canClimb;
+    private bool canExtinguishFire;
     private bool isClimbing;
     
     private Rigidbody2D rb2d;
@@ -17,15 +20,24 @@ public class MovementWithoutPot : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (canExtinguishFire)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("Extinguish Fire Hut");
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
-        //Debug.Log(isClimbing);
-        
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 movementAbsInput = new Vector2(Mathf.Abs(movementInput.x), Mathf.Abs(movementInput.y));
 
         Vector2 direction = movementInput.normalized;
-
+        
         if (canClimb)
         {
             if (movementAbsInput.y > 0f) isClimbing = true;
@@ -55,7 +67,7 @@ public class MovementWithoutPot : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
         {
-            
+            canExtinguishFire = true;
         }
     }
 
@@ -69,7 +81,7 @@ public class MovementWithoutPot : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
         {
-            
+            canExtinguishFire = false;
         }
     }
 }
