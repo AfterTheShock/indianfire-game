@@ -14,6 +14,12 @@ public class MovementWithPot : MonoBehaviour
     [SerializeField] float playerHeight = 3f;
     [SerializeField] float RotationToSlopSpeed = 2f;
 
+    [SerializeField] GameObject normalVisuals;
+    [SerializeField] GameObject fallenVisuals;
+
+    private PotOnHandManager potOnHandManager;
+    private MovementWithoutPot movementWithoutPot;
+
     private InputSystem_Actions inputs;
 
     private float arrowsInputs;
@@ -25,7 +31,14 @@ public class MovementWithPot : MonoBehaviour
         inputs = new InputSystem_Actions();
         inputs.Player.Enable();
         rb = GetComponent<Rigidbody2D>();
+        potOnHandManager = GetComponent<PotOnHandManager>();
+        movementWithoutPot = GetComponent<MovementWithoutPot>();
     }
+    private void OnEnable()
+    {
+        rotationTransform.localEulerAngles = Vector3.zero;
+    }
+
     private void Update()
     {
         RotationManager();
@@ -48,7 +61,7 @@ public class MovementWithPot : MonoBehaviour
 
     private void ManagePlayerAnimations()
     {
-        if (wasdInputs != 0) animator.Play("WalkWithPotPlayer");
+        if (wasdInputs != 0 && animator.gameObject.activeSelf) animator.Play("WalkWithPotPlayer");
         if(wasdInputs > 0) rotationTransform.localScale = new Vector3(1,1,1);
         if(wasdInputs < 0) rotationTransform.localScale = new Vector3(-1,1,1);
     }
@@ -99,13 +112,22 @@ public class MovementWithPot : MonoBehaviour
 
         if (rotationTransform.localEulerAngles.z < rotationLimits.y && rotationTransform.localEulerAngles.z > rotationLimits.x)
         {
+            bool isFallingFromRight = false;
+            if(rotationTransform.localEulerAngles.z < rotationLimits.y && rotationTransform.localEulerAngles.z > 180) isFallingFromRight = true;
             rotationTransform.localEulerAngles = oldAngles;
-            FallOverWithPot();
+            FallOverWithPot(isFallingFromRight);
         }
     }
 
-    private void FallOverWithPot()
+    private void FallOverWithPot(bool isFallingFromRight = false)
     {
-        Debug.Log("No esta implementado el caerse con el jarron");
+
+        movementWithoutPot.MakePlayerFall(isFallingFromRight);
+        potOnHandManager.DropPot();
+
+
+        if (isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, 90);
+        if(isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, -90);
     }
+
 }

@@ -1,16 +1,43 @@
 fileFormatVersion: 2
-guid: 32b9666eb07bfe14294d41138a5285c5
+guid: 5560d9738ae91784e9ddbd4bfa714faf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6209441807000284706
-    second: tileset1_0
+      213: -5606718777101302656
+    second: volcano_0
   - first:
-      213: -9017634572401362149
-    second: tileset1_1
+      213: 1304653414998942440
+    second: volcano_1
   - first:
-      213: -6531580382025513940
-    second: tileset1_2
+      213: 5301505178895614952
+    second: volcano_2
+  - first:
+      213: 2615915848174568196
+    second: volcano_3
+  - first:
+      213: 4775730224201547763
+    second: volcano_4
+  - first:
+      213: 1792611465283246390
+    second: volcano_5
+  - first:
+      213: -8700902609713780941
+    second: volcano_6
+  - first:
+      213: 5409704606004118171
+    second: volcano_7
+  - first:
+      213: -5882474024631162623
+    second: volcano_8
+  - first:
+      213: 7562087981470146500
+    second: volcano_9
+  - first:
+      213: 6785995985832939086
+    second: volcano_10
+  - first:
+      213: 933940914369931609
+    second: volcano_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +159,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset1_0
+      name: volcano_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
+        x: 0
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22e26b7ac6e5c2650800000000000000
-      internalID: 6209441807000284706
+      spriteID: 0844d575afee032b0800000000000000
+      internalID: -5606718777101302656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset1_1
+      name: volcano_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 32
+        x: 600
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b3cb5422dead280800000000000000
-      internalID: -9017634572401362149
+      spriteID: 8e2230c5e5f0b1210800000000000000
+      internalID: 1304653414998942440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset1_2
+      name: volcano_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 32
+        x: 1200
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,74 +218,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2485739f3a2b55a0800000000000000
-      internalID: -6531580382025513940
+      spriteID: 8e387f22fdab29940800000000000000
+      internalID: 5301505178895614952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset1_3
+      name: volcano_3
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
+        x: 1800
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fe096b64d806e9f489ccdd888fc8bf38
-      internalID: -652401522
+      spriteID: 40382ccaa999d4420800000000000000
+      internalID: 2615915848174568196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset1_4
+      name: volcano_4
       rect:
         serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
+        x: 2400
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f91a55761be055a4085b5eab4f5ab521
-      internalID: 723133446
+      spriteID: 3ff31a4065dc64240800000000000000
+      internalID: 4775730224201547763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset1_5
+      name: volcano_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
+        x: 3000
+        y: 0
+        width: 600
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 052c84b12c085b14fb59e71fed4df0c3
-      internalID: -1495365041
+      spriteID: 639108841a2a0e810800000000000000
+      internalID: 1792611465283246390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: volcano_6
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 0
+        width: 600
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 337adb20d2f204780800000000000000
+      internalID: -8700902609713780941
       vertices: []
       indices: 
       edges: []
@@ -267,7 +316,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f97dbd2009af70f478d310f16020530b
+    spriteID: 74db491e846de364a8086b1a95faab23
     internalID: 0
     vertices: []
     indices: 
@@ -277,14 +326,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":600.0,"y":200.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      tileset1_0: 6209441807000284706
-      tileset1_1: -9017634572401362149
-      tileset1_2: -6531580382025513940
-      tileset1_3: -652401522
-      tileset1_4: 723133446
-      tileset1_5: -1495365041
+      volcano_0: -5606718777101302656
+      volcano_1: 1304653414998942440
+      volcano_2: 5301505178895614952
+      volcano_3: 2615915848174568196
+      volcano_4: 4775730224201547763
+      volcano_5: 1792611465283246390
+      volcano_6: -8700902609713780941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

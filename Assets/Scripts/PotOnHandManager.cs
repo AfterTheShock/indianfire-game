@@ -37,7 +37,7 @@ public class PotOnHandManager : MonoBehaviour
         }
     }
 
-    private void DropPot()
+    public void DropPot()
     {
         if (!hasPotGrabbed) return;
 

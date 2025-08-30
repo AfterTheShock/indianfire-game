@@ -20,8 +20,18 @@ public class MovementWithoutPot : MonoBehaviour
     
     private Rigidbody2D rb2d;
 
-    private Vector2 movementInput;
-    
+    private bool isFallen = false;
+
+    [SerializeField] Transform visualsHolder;
+
+    [SerializeField] GameObject normalVisuals;
+    [SerializeField] GameObject fallenVisuals;
+    [SerializeField] float timeFalling = 1.5f;
+
+    [SerializeField] Vector2 fallenRotationLeftAndRight = new Vector2(90, -90);
+
+    Vector2 movementInput;
+
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -30,6 +40,7 @@ public class MovementWithoutPot : MonoBehaviour
 
     private void Update()
     {
+        if (isFallen) return;
         Debug.Log(canGrabPot);
         
         if (canExtinguishFire)
@@ -54,6 +65,8 @@ public class MovementWithoutPot : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isFallen) return;
+
         movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 movementAbsInput = new Vector2(Mathf.Abs(movementInput.x), Mathf.Abs(movementInput.y));
 
@@ -81,11 +94,31 @@ public class MovementWithoutPot : MonoBehaviour
                 Mathf.Clamp(movementAbsInput.y * acceleration.y, -maxSpeed.y, maxSpeed.y)) * Time.fixedDeltaTime;
         }
     }
-    
+
+    public void MakePlayerFall(bool isFallingFromRight = false)
+    {
+        this.transform.position += new Vector3(0, .25f, 0);
+        visualsHolder.localScale = new Vector3(1, 1, 1);
+        if (!isFallingFromRight) visualsHolder.localEulerAngles = new Vector3(0, 0, fallenRotationLeftAndRight.x);
+        if (isFallingFromRight) visualsHolder.localEulerAngles = new Vector3(0, 0, fallenRotationLeftAndRight.y);
+        isFallen = true;
+        fallenVisuals.SetActive(true);
+        normalVisuals.SetActive(false);
+        Invoke("ResetPlayerFalling", timeFalling);
+    }
+
+    private void ResetPlayerFalling()
+    {
+        visualsHolder.localEulerAngles = Vector3.zero;
+        isFallen = false;
+        fallenVisuals.SetActive(false);
+        normalVisuals.SetActive(true);
+    }
+
     private void ManagePlayerAnimations()
     {
         if (movementInput.x != 0) animator.Play("WalkWithoutPotPlayer");
-        else animator.Play("IdleWithoutPotPlayer 1");
+        else animator.Play("IdleWithoutPotPlayer");
         if(movementInput.x > 0) playerVisuals.localScale = new Vector3(1,1,1);
         if(movementInput.x < 0) playerVisuals.localScale = new Vector3(-1,1,1);
     }
