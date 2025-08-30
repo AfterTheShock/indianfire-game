@@ -1,8 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class MovementWithoutPot : MonoBehaviour
 {
     [SerializeField] private Vector2 acceleration;
     [SerializeField] private Vector2 deceleration;
@@ -13,12 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isClimbing;
     
     private Rigidbody2D rb2d;
-    private BoxCollider2D boxCollider;
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void FixedUpdate()
@@ -56,6 +52,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Climb")) canClimb = true;
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
+        {
+            
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -64,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isClimbing = false;
             canClimb = false;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
+        {
+            
         }
     }
 }
