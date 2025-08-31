@@ -5167,8 +5167,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 2}
+  m_Offset: {x: 0.03356731, y: -0.06353378}
+  m_Size: {x: 0.6828654, y: 1.8729324}
   m_Direction: 0
 --- !u!50 &5121177293547701292
 Rigidbody2D:
@@ -5258,9 +5258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f39371ceee990348b03348a52b87b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  acceleration: {x: 400, y: 400}
+  acceleration: {x: 400, y: 200}
   deceleration: {x: 200, y: 200}
-  maxSpeed: {x: 1500, y: 1500}
+  maxSpeed: {x: 1200, y: 150}
   climbLayerMask:
     serializedVersion: 2
     m_Bits: 64
