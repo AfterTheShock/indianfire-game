@@ -15,7 +15,8 @@ public class MovementWithoutPot : MonoBehaviour
     
     private bool canClimb;
     private bool isClimbing;
-    private bool canGrabPot;
+    public bool canGrabPot;
+    private GameObject potToGrab;
     
     private Rigidbody2D rb2d;
 
@@ -39,14 +40,14 @@ public class MovementWithoutPot : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(canGrabPot);
         if (isFallen) return;
-        Debug.Log(canGrabPot);
 
         if (canGrabPot)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                potOnHandManager.GrabPot();
+                if(potToGrab) potOnHandManager.GrabPot(potToGrab.GetComponent<FollowPot>().potReference.gameObject, potToGrab);
                 canGrabPot = false;
             }
         }
@@ -108,10 +109,29 @@ public class MovementWithoutPot : MonoBehaviour
 
     private void ManagePlayerAnimations()
     {
-        if (movementInput.x != 0) animator.Play("WalkWithoutPotPlayer");
-        else animator.Play("IdleWithoutPotPlayer");
+        
         if(movementInput.x > 0) playerVisuals.localScale = new Vector3(1,1,1);
         if(movementInput.x < 0) playerVisuals.localScale = new Vector3(-1,1,1);
+
+        if (!animator.gameObject.activeSelf || animator == null) return;
+
+        if (isClimbing)
+        {
+            animator.Play("ClimingAnimation");
+            if (movementInput.x != 0 || movementInput.y != 0) animator.speed = 1;
+            else animator.speed = 0;
+        }
+        else if (movementInput.x != 0)
+        {
+            animator.Play("WalkWithoutPotPlayer");
+            animator.speed = 1;
+
+        }
+        else 
+        { 
+            animator.Play("IdleWithoutPotPlayer");
+            animator.speed = 1;
+        }
     }
     
     private void OnTriggerStay2D(Collider2D other)
@@ -120,10 +140,10 @@ public class MovementWithoutPot : MonoBehaviour
         {
             canClimb = true;
         }
-        
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))
+        if (other.gameObject.layer == 10)
         {
             canGrabPot = true;
+            potToGrab = other.gameObject;
         }
     }
 
@@ -135,7 +155,7 @@ public class MovementWithoutPot : MonoBehaviour
             canClimb = false;
         }
         
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))
+        if (other.gameObject.layer == 10)
         {
             canGrabPot = false;
         }

@@ -64,6 +64,8 @@ public class HutController : MonoBehaviour
 
     public void ExtinguishFire()
     {
+        if (currentFireLevel == 3 || CurrentHutState == HutState.Burned) return;
+
         ChangeFireState(0);
     }
 }

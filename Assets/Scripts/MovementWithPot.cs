@@ -20,6 +20,8 @@ public class MovementWithPot : MonoBehaviour
     private PotOnHandManager potOnHandManager;
     private MovementWithoutPot movementWithoutPot;
 
+    public PotOnGround potGrabbed;
+
     private InputSystem_Actions inputs;
 
     private float arrowsInputs;
@@ -40,6 +42,7 @@ public class MovementWithPot : MonoBehaviour
     private void OnEnable()
     {
         rotationTransform.localEulerAngles = Vector3.zero;
+        rotationTransform.rotation = Quaternion.identity;
 
         if (inputs == null) inputs = new InputSystem_Actions();
         inputs.Player.Enable();
@@ -62,7 +65,10 @@ public class MovementWithPot : MonoBehaviour
         {
             if (canExtinguishFire && hutReference != null)
             {
+                if (!this.GetComponent<PotOnHandManager>().hasWaterOnPot) return;
+
                 hutReference.ExtinguishFire();
+                potOnHandManager.DropWater();
             }
         }
     }
@@ -142,8 +148,10 @@ public class MovementWithPot : MonoBehaviour
     {
 
         movementWithoutPot.MakePlayerFall(isFallingFromRight);
-        potOnHandManager.DropPot();
-
+        potOnHandManager.DropPot(true);
+        potOnHandManager.DropWater();
+        if(potGrabbed) potGrabbed.hasWater = false;
+        potOnHandManager.SetWaterOnPot(false);
 
         if (isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, 90);
         if(isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, -90);

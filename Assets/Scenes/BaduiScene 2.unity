@@ -5931,7 +5931,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 0, z: -10}
+  FollowOffset: {x: 0, y: 1.5, z: -10}
 --- !u!114 &521267827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5984,7 +5984,7 @@ Transform:
   m_GameObject: {fileID: 521267825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -0.06, z: -10}
+  m_LocalPosition: {x: -0.12, y: 1.44, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11039,7 +11039,7 @@ Transform:
   m_GameObject: {fileID: 1922376561}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -0.06, z: -10}
+  m_LocalPosition: {x: -0.12, y: 1.44, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11405,8 +11405,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4678827904477828588, guid: 3da862f6685eb444eb7a205f816ccdb2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1602104588955284381}
   m_SourcePrefab: {fileID: 100100000, guid: 3da862f6685eb444eb7a205f816ccdb2, type: 3}
+--- !u!1 &1602104588955284380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4678827904477828588, guid: 3da862f6685eb444eb7a205f816ccdb2, type: 3}
+  m_PrefabInstance: {fileID: 1602104588955284379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1602104588955284381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602104588955284380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8b45969348b4445bc0b8dd465d0dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PotOnGround
+  hasWater: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
