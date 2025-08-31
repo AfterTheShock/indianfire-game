@@ -67,6 +67,7 @@ public class MovementWithPot : MonoBehaviour
             {
                 if (!this.GetComponent<PotOnHandManager>().hasWaterOnPot) return;
 
+                if (hutReference.CurrentHutState == HutState.Burned) return;
                 hutReference.ExtinguishFire();
                 potOnHandManager.DropWater();
             }

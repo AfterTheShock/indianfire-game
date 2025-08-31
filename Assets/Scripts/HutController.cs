@@ -15,13 +15,6 @@ public class HutController : MonoBehaviour
 
     public HutState CurrentHutState;
     
-    public enum HutState
-    {
-        None,
-        Burning,
-        Burned,
-    }
-    
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -68,4 +61,11 @@ public class HutController : MonoBehaviour
 
         ChangeFireState(0);
     }
+}
+
+public enum HutState
+{
+    None,
+    Burning,
+    Burned,
 }
