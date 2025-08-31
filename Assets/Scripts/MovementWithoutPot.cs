@@ -41,7 +41,6 @@ public class MovementWithoutPot : MonoBehaviour
     private void Update()
     {
         if (isFallen) return;
-        Debug.Log(canGrabPot);
         
         if (canExtinguishFire)
         {
@@ -117,10 +116,34 @@ public class MovementWithoutPot : MonoBehaviour
 
     private void ManagePlayerAnimations()
     {
-        if (movementInput.x != 0) animator.Play("WalkWithoutPotPlayer");
-        else animator.Play("IdleWithoutPotPlayer");
         if(movementInput.x > 0) playerVisuals.localScale = new Vector3(1,1,1);
         if(movementInput.x < 0) playerVisuals.localScale = new Vector3(-1,1,1);
+
+        if (!animator.gameObject.activeSelf || !playerVisuals.gameObject.activeSelf) return;
+
+        if (isClimbing)
+        {
+            if (movementInput.x != 0 || movementInput.y != 0)
+            {
+                animator.Play("ClimingAnimation");
+                animator.speed = 1;
+            }
+            else
+            {
+                animator.Play("ClimingAnimation");
+                animator.speed = 0;
+            }
+        }
+        else if (movementInput.x != 0)
+        {
+            animator.speed = 1;
+            animator.Play("WalkWithoutPotPlayer");
+        }
+        else
+        {
+            animator.speed = 1;
+            animator.Play("IdleWithoutPotPlayer");
+        }
     }
     
     private void OnTriggerStay2D(Collider2D other)
