@@ -4,7 +4,8 @@ public class HutController : MonoBehaviour
 {
     [SerializeField] private bool startOnFire;
     [SerializeField] private float timeBtwFireStates;
-    
+
+    public bool wasTuredOff = false;
     
     private int currentFireLevel = 0;  // 0 es apagado
     private float currentTimeBtwFireStates;
@@ -60,6 +61,8 @@ public class HutController : MonoBehaviour
         if (currentFireLevel == 3 || CurrentHutState == HutState.Burned) return;
 
         ChangeFireState(0);
+
+        wasTuredOff = true;
     }
 }
 

@@ -4243,7 +4243,7 @@ GameObject:
   - component: {fileID: 1798483443}
   m_Layer: 9
   m_Name: Hut
-  m_TagString: Untagged
+  m_TagString: Hut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4262,6 +4262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HutController
   startOnFire: 1
   timeBtwFireStates: 10
+  wasTuredOff: 0
   CurrentHutState: 0
 --- !u!61 &1798483444
 BoxCollider2D:
