@@ -23,11 +23,23 @@ public class PotOnHandManager : MonoBehaviour
 
     private void Start()
     {
-        inputs = new InputSystem_Actions();
+        if (inputs == null) inputs = new InputSystem_Actions();
         inputs.Player.Enable();
         movementWithPot = this.gameObject.GetComponent<MovementWithPot>();
         movementWithoutPot = this.gameObject.GetComponent<MovementWithoutPot>();
     }
+
+    private void OnEnable()
+    {
+        if (inputs == null) inputs = new InputSystem_Actions();
+        inputs.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputs.Player.Disable();
+    }
+
 
     private void Update()
     {

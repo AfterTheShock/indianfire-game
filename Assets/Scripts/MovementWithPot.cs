@@ -30,15 +30,24 @@ public class MovementWithPot : MonoBehaviour
 
     private void Start()
     {
-        inputs = new InputSystem_Actions();
+        if(inputs == null) inputs = new InputSystem_Actions();
         inputs.Player.Enable();
         rb = GetComponent<Rigidbody2D>();
         potOnHandManager = GetComponent<PotOnHandManager>();
         movementWithoutPot = GetComponent<MovementWithoutPot>();
     }
+
     private void OnEnable()
     {
         rotationTransform.localEulerAngles = Vector3.zero;
+
+        if (inputs == null) inputs = new InputSystem_Actions();
+        inputs.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputs.Player.Disable();
     }
 
     private void Update()
