@@ -14,7 +14,6 @@ public class MovementWithoutPot : MonoBehaviour
     private PotOnHandManager potOnHandManager;
     
     private bool canClimb;
-    private bool canExtinguishFire;
     private bool isClimbing;
     private bool canGrabPot;
     
@@ -42,14 +41,6 @@ public class MovementWithoutPot : MonoBehaviour
     {
         if (isFallen) return;
         Debug.Log(canGrabPot);
-        
-        if (canExtinguishFire)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("Extinguish Fire Hut");
-            }
-        }
 
         if (canGrabPot)
         {
@@ -129,11 +120,6 @@ public class MovementWithoutPot : MonoBehaviour
         {
             canClimb = true;
         }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
-        {
-            canExtinguishFire = true;
-        }
         
         if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))
         {
@@ -147,11 +133,6 @@ public class MovementWithoutPot : MonoBehaviour
         {
             isClimbing = false;
             canClimb = false;
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
-        {
-            canExtinguishFire = false;
         }
         
         if (other.gameObject.layer == LayerMask.NameToLayer("Pot"))

@@ -24,6 +24,8 @@ public class MovementWithPot : MonoBehaviour
 
     private float arrowsInputs;
     private float wasdInputs;
+    private bool canExtinguishFire;
+    private HutController hutReference;
     private Rigidbody2D rb;
 
     private void Start()
@@ -46,6 +48,14 @@ public class MovementWithPot : MonoBehaviour
         RotatePlayerBySpeed();
         ManagePlayerAnimations();
         //ManageWorldRotationRelativeToTheGround();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (canExtinguishFire && hutReference != null)
+            {
+                hutReference.ExtinguishFire();
+            }
+        }
     }
 
     private void ManageWorldRotationRelativeToTheGround()
@@ -129,5 +139,22 @@ public class MovementWithPot : MonoBehaviour
         if (isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, 90);
         if(isFallingFromRight) rotationTransform.localEulerAngles = new Vector3 (0, 0, -90);
     }
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
+        {
+            canExtinguishFire = true;
+            hutReference = other.gameObject.GetComponent<HutController>();
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hut"))
+        {
+            canExtinguishFire = false;
+            hutReference = null;
+        }
+    }
 }
